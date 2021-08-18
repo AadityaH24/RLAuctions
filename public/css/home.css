@@ -1,0 +1,124 @@
+body{
+    background-image: url('../images/rl3.png');
+    background-color: rgba(0, 0, 0, 0.2);
+    
+}
+
+.login-body{
+    background-image: url('../images/rl2.jpg');
+
+}
+
+.success-body{
+  background: black;
+}
+
+.form-inline{
+    position: absolute;
+    right: 20px;
+}
+
+.btn-success{
+    margin-left: 20px;
+    background-color: #00bcd4;
+}
+
+.nav-item{
+       margin-left: 20px;
+}
+
+.desc{
+  text-align: center;
+   
+}
+.pdesc{
+    color: white;
+    font-size: 20px;
+    padding: 40px;
+}
+
+.products{
+    border: 1px solid white;
+    /* border-width: 5px;
+    border-radius: 15px; */
+    background-color: transparent;
+    text-align: center;
+    color: white;
+    font: bold;
+    margin: 20px;
+    margin-left: 100px;
+    width: 500px;
+    
+}
+
+.anchorProduct:hover{
+    text-decoration: none;
+}
+
+.itemEntry{
+    margin-top: 3rem;
+    width: 35%;
+    padding: 3rem 2rem;
+    background-color: transparent;
+    border: 5px solid black;
+}
+
+/* Sign in */
+
+
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.card{
+    background-color: transparent;
+    color: white;
+}
+/* End of Sign in */
+
+/* Bid Button */
+.bidButton{
+  margin: auto 100px;
+}
+
+/* profile */
+.profile{
+  margin: 100px 50px;
+  color: aliceblue;
+  font-size: x-large;
+}
+
+.successmsg{
+  background-color: transparent;
+  margin: 50px 40px;
+  color: white;
+  border-radius: 50px;
+  
+}

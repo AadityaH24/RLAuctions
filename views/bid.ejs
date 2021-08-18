@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/home.css">
+    <title>SellIt!</title>
+</head>
+<body >
+<!--Style-->
+<style>
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+* {
+	box-sizing: border-box;
+}
+
+/* body{
+  background-image: url(https://rocketleague.media.zestyio.com/year2_hero_blog_notext.f44ca8609585ba611e1277fc600f5cc1.jpg);
+} */
+
+
+
+
+.course {
+	background-color: #707070;
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+  max-width: 100%;
+  height: 250px;
+	margin: 20px;
+	overflow: hidden;
+	width: 800px;
+}
+
+.course h6 {
+	opacity: 0.6;
+	margin: 0;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+}
+
+.course h2 {
+  font-size: 28px;
+	letter-spacing: 1px;
+	margin: 10px 0;
+}
+
+.course-preview {
+	background-color: #1661A6;
+	color: #fff;
+	padding: 30px;
+	width: 300px;
+}
+
+.course-preview a {
+	color: #fff;
+	display: inline-block;
+	font-size: 12px;
+	opacity: 0.6;
+	margin-top: 5px;
+  text-decoration: none;
+}
+
+.course-info {
+	padding: 30px;
+	position: relative;
+	width: 100%;
+}
+.course-info {
+  color: #fff;
+}
+.course-info h2 {
+  font-size: 16px;
+	letter-spacing: 1px;
+	margin: 10px 0;
+}
+.button {
+	background-color: #1661A6;
+	border: 0;
+	border-radius: 50px;
+	box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	font-size: 16px;
+	padding: 12px 25px;
+	letter-spacing: 1px;
+}
+.bidButton {
+	background-color: #1661A6;
+	border: 0;
+	border-radius: 50px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	color: #fff;
+	font-size: 16px;
+	padding: 12px 25px;
+  position: absolute;
+	letter-spacing: 1px;
+  margin: auto;
+}
+.card {
+	background-color: #707070;
+	border-radius: 10px;
+	box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+	display: flex;
+  max-width: 100%;
+	margin: auto;
+	overflow: hidden;
+	width: 800px;
+  top: 30px;
+}
+
+.card-header {
+	background-color: #1661A6;
+  border-radius: 10px;
+	color: #fff;
+	padding: 20px;
+}
+.card-footer {
+  background-color: #1661A6;
+  border-radius: 10px;
+	color: #fff;
+}
+
+.bidentry{
+  border-radius: 10px;
+ text-align: center;
+ outline: none;
+  
+}
+</style>
+<!--Navbar-->
+<nav class="navbar navbar-expand-sm navbar-dark shadow" style="background-color: black;">
+    <ul class="navbar-nav">
+		<li class="nav-item active">
+			<img src="./images/signin.png" class="img-fluid" style="width: 40px; height: 40px; overflow: hidden;">
+		  </li>
+		  <li class="nav-item active nav-link">
+			Rocket League Auctions  
+		  </li>
+		  <li class="nav-item active" style="margin-left: 890px;">
+			<a class="nav-link" href="/list">Home</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="/profile">Profile</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="/add">Add Item</a>
+		  </li>
+		  <li class="nav-item">
+			<a class="nav-link" href="/Help">Help</a>
+		  </li>
+    </ul>
+    
+</nav>
+
+
+  <div class="card text-center"  style="margin-top: 100px;">
+    <div class="card-header">
+      <h2><%= data["name"] %></h2>
+      <form action="/something" method="POST" >
+		<button type="submit" class="button"><h6>Seller: <%= data["poster"] %></h6></button>
+		
+			<% var sendusername = encodeURI(data["poster"]);%>
+		
+  
+        <input type="hidden" name="otherusername" value= <%= sendusername%> >
+      </form>
+
+    </div>
+    <div class="card-body">
+	  <h5 class="card-title">Highest Bid:  <%= data["cprice"] %><img src= "https://www.aoeah.com/images/rocket%20league/items/PS4-Credits.png" width=18px></h5>
+	  <h5 class="card-title">Highest Bidder:  <%= data["win1"] %>
+      <p class="card-text" style="margin-top: 15px;">Category:  <%= data["info"] %> </p>
+    </div>
+    <div class="card-footer">
+    <form action="/successbid" method="POST">
+      <input type="number" placeholder="Enter Your Bid" name="bidprice" class="bidentry">
+        <button class="button" type="submit" style="margin-left: 10px;">Bid</button>
+    </form>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/profile.css">
+    <link rel="stylesheet" href="./css/list.css">
+   
+    <title>Your Profile!</title>
+</head>
+<body style="background-color: #343a40;">
+    
+<!--Navbar-->
+<nav class="navbar navbar-expand-sm navbar-dark shadow " style="background-color: rgba(0,0,0,1);" >
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <img src="./images/signin.png" class="img-fluid" style="width: 40px; height: 40px; overflow: hidden;">
+      </li>
+      <li class="nav-item active nav-link">
+        Rocket League Auctions  
+      </li>
+      <li class="nav-item active" style="margin-left: 890px;">
+        <a class="nav-link" href="/list">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/profile">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/add">Add Item</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Help">Help</a>
+      </li>
+    </ul>
+   
+  </nav>
+
+<!--body-->
+<div class="full-container">
+  <div class="profile-container">
+    <div class="row panel">
+      <img src="https://cdn.jpegmini.com/user/images/slider_puffin_before_mobile.jpg" class="pro-img">
+        <div class="pbox">  
+            <h1><%= username%></h1>
+            <h1 style="font-size: small;"><%= email  %> </h1>
+        </div>
+    </div>   
+    <form action="/logout" method="POST" >
+      <button type="submit" class="btn btn-primary" style="margin-left: 155px;">Log Out</button>
+      </form>
+  </div>
+  <div class="list-container">
+    <button class="tablink" onclick="openPage('Bids', this, '#f9813a')">Bids</button>
+    <button class="tablink" onclick="openPage('Listings', this, '#1C709D')" id="defaultOpen">Listings</button>
+
+
+    <div id="Bids" class="tabcontent">
+      <h1>Your Bids</h1>
+      <h6>Listed below</h6>
+      <% if(userbids!=null){ %>
+        
+      <% for(var key of Object.keys(userbids)){ %> 
+          <% if(userbids[key]["username"] === username){ var id = userbids[key]["bidid"]; %> 
+            <div class="courses-container">
+              <div class="course">
+                <div class="course-preview">
+                  <h6>Item name</h6>
+                  <h2><%= auctions[id]["name"] %></h2>
+                  <a>Seller: <%= auctions[id]["poster"] %> <i class="fas fa-chevron-right"></i></a>
+                </div>
+                <div class="course-info">
+                  <h6>Item Details</h6>
+                  <h2>Description: <%= auctions[id]["info"] %></h2>
+                  <h2>Highest Bid: <%= auctions[id]["cprice"] %><img src= "https://www.aoeah.com/images/rocket%20league/items/PS4-Credits.png" width=18px></h2>
+                  <a href=<%= "/list/" + userbids[key]["bidid"] %>   class="anchorProduct">
+                    <button class="vbtn">View more</button>
+                  </a>
+                </div>
+              </div>
+            </div>
+        <% }}} %>  
+      
+    </div>
+    
+    <div id="Listings" class="tabcontent">
+      <h1>Your Listings</h1>
+      <h6>Listed below</h6>
+      <div class="listview">
+        <% if(auctions != null){  %>
+          <% for( var key of Object.keys(auctions)) { %> 
+            <% if(auctions[key]["poster"] === username){ %> 
+            <div class="courses-container">
+              <div class="course"> 
+                <div class="course-preview" >
+                            
+                  <h6>Item name</h6>
+                  <h2><%= auctions[key]["name"] %></h2>
+                </div>
+                <div class="course-info">
+                  <div style="float: left;">
+                  <h6>Item Details</h6>
+                  <h2>Description: <%= auctions[key]["info"] %></h2>
+                  <h2>Highest Bid: <%= auctions[key]["cprice"] %><img src= "https://www.aoeah.com/images/rocket%20league/items/PS4-Credits.png" width=18px></h2>
+                  <h2>Top Bidder: <%= auctions[key]["win1"] %></h2>
+                </div>
+                  <!-- Button to delete the auction listing -->
+                  
+                  <div style="float: right; margin-top: 30px; border-radius: 10px;" >
+                    <% if(auctions[key]["status"] === 1){ %> 
+                  <form action="/delete" method="POST">
+                    <button type="submit" class="btn-primary">Delete</button>
+                    <input type="hidden"  style="border-radius: 10px;" name="deleteItem" value=<%= key  %>  ></input>
+                  </form>
+                  <% }else{ %>
+                  
+                      <p>CLOSED</p>
+                  <% } %> 
+                  </div>  
+                  
+
+                </div>
+              </div>
+              
+            </div>
+          
+          <% } %>
+          <% } %> 
+          <% } %> 
+          <% if(auctions == null){ %>
+            <div class="desc"><p class="pdesc">You haven't created any listings yet!</p></div>
+          <% } %>
+        
+     
+      </div>
+    </div>
+  </div>
+</div>
+<!--script-->
+<script>
+function openPage(pageName, elmnt, color) {
+  // Hide all elements with class="tabcontent" by default */
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Remove the background color of all tablinks/buttons
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+
+  // Show the specific tab content
+  document.getElementById(pageName).style.display = "block";
+
+  // Add the specific color to the button used to open the tab content
+  elmnt.style.backgroundColor = color;
+  elmnt.style.color
+}
+
+// Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+
+$(document).ready(function() {
+
+$(".box").hover(function() {
+  $(".box-right").toggleClass('cl-box2');
+  $(".bar").toggleClass('cl-bar2');
+});
+
+$(".bar").click(function() {
+  alert("Deleted");
+});
+});
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/add.css">
+    
+    <title>Add</title>
+</head>
+<body style="background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9));">
+    
+<!--Navbar-->
+<nav class="navbar navbar-expand-sm navbar-dark shadow " style="background-color: rgba(0,0,0,1);">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <img src="./images/signin.png" class="img-fluid" style="width: 40px; height: 40px; overflow: hidden;">
+      </li>
+      <li class="nav-item active nav-link">
+        Rocket League Auctions  
+      </li>
+      <li class="nav-item active" style="margin-left: 890px;">
+        <a class="nav-link" href="/list">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/profile">Profile</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/add">Add Item</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/Help">Help</a>
+      </li>
+    </ul>
+  </nav>
+  
+
+<!-- Item Entry -->
+
+<div class="add-con" style="font-family: Arial, Helvetica, sans-serif; font: bold;">
+  <form action="/successitem" method="POST">
+    <!--  General -->
+    <div class="form-group">
+      <h2 class="heading full">Item Details</h2>
+      <div class="controls full">
+        <input type="text" id="firstName" class="floatLabel" name="pname" autocomplete="off">
+        <label for="firstName">Item Name</label>
+      </div>
+      <div class="controls full">
+        <select class="floatLabel" name="info">
+          <option value="blank"></option>
+          <option value="Car">Car</option>
+          <option value="Wheels">Wheels</option>
+          <option value="Goal Explosion">Goal Explosion</option>
+          <option value="Boost">Boost</option>
+          
+        </select>
+        <label for="email">Category</label>
+      </div>
+    </div>
+    <!--  Details -->
+    <div class="form-group">
+      <h2 class="heading full">Listing Details</h2>
+      <div class="controls full">
+        <input type="text" id="cell" class="floatLabel" name="bprice" autocomplete="off">
+        <label for="cell">Price</label>
+      </div>
+      
+    </div>
+    <!--  More -->
+    <div class="form-group">
+      <div class="controls full">
+        <button class="full">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+</body>
+<script>
+  // Added input value check on postback/load, removed floatLabel class from select input. Modified the scss, added color map.
+
+(function($){
+	function floatLabel(inputType){
+		$(inputType).each(function(){
+			var $this = $(this);
+			var text_value = $(this).val();
+
+			// on focus add class "active" to label
+			$this.focus(function(){
+				$this.next().addClass("active");
+			});
+
+			// on blur check field and remove class if needed
+			$this.blur(function(){
+				if($this.val() === '' || $this.val() === 'blank'){
+					$this.next().removeClass();
+					}
+			});
+					
+			// Check input values on postback and add class "active" if value exists
+			if(text_value!=''){
+				$this.next().addClass("active");
+				}
+			});
+    
+    	// Automatically remove floatLabel class from select input on load
+    	$( "select" ).next().removeClass();
+	}
+	// Add a class of "floatLabel" to the input field
+	floatLabel(".floatLabel");
+})(jQuery);
+</script>
+</html>
