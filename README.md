@@ -1,2 +1,2 @@
 # RLAuctions
-Simple Node.js practice Auctioning website.
+Simple Node.js Auctioning website.
